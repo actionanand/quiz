@@ -1,3 +1,29 @@
-<h1>{{title}}</h1>
+<div class="quiz" role="banner">
+  <header>
+    <h1 id="h1">HTML &amp; CSS Quiz</h1>
+  </header>
+    <div id="tracker">
+      <div *ngFor="let n of nums" class="nos" id="{{ 'nos' + n}}" [style.background-color]="this.trackerColor[n-1]">{{ n }}</div>
+    </div>
+    <hr style="margin-bottom: 20px;">
+
+  <div id="quizSet" [style.display] = "display ? 'none' : 'block'">
+    <p id="question">{{ question }}</p>
+    <div id="options" class="options">
+		<button [style.backgroundColor] = "optionBg && (i + 1) == ans ? '#1aff1a' : defaultColor" *ngFor="let o of options; index as i" id="{{ 'btn' + (i+1)}}" class="button"><span (click) = "optionSelect($event)" id="{{ 'option' + (i+1) }}">{{ o }}</span></button>
+    </div>
+    <button (click) = "nextQuestion()" id="submit">Next Question</button>
+  </div>
+  <div id="resultBox" [style.display] = "!display ? 'none' : 'block'">
+    <p id="result">{{ result }} </p>
+    <button (click) = "retakeTest()" id="retake">Retake Test</button>
+  </div>
+  <hr style="margin-top: 30px;">
+  
+  <footer>
+    <p id="progress">{{ progress }}</p>
+    <div #timerEl id="timer">{{ timer }}</div>
+  </footer>
+</div>
 
 <router-outlet></router-outlet>
