@@ -1,8 +1,11 @@
 {
-  "/questions": {
-    "target": "https://3000-actionanand-quiz-v04ja8xzwqf.ws-us43.gitpod.io/",
+  "/api": {
+    "target": "http://localhost:3000/questions",
     "secure": false,
     "logLevel": "debug",
-    "changeOrigin": true
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/db/api": "/api"
+    }
   }
 }

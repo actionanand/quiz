@@ -10,9 +10,8 @@ export class QuestionsService {
   constructor(private http : HttpClient) { }
 
   getQuestions() {
-    // const url = 'http://localhost:3000/questions';
-    const url = '/questions';
-    // const url = 'https://3000-actionanand-quiz-v04ja8xzwqf.ws-us43.gitpod.io/questions';
+    // const url = 'http://localhost:3000/questions'; // for fake server
+    const url = 'https://raw.githubusercontent.com/actionanand/json-server/main/db/api/quiz/questions.json';
 
     return this.http.get(url);
   }

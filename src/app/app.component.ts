@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   score = 0;
   ans:any;
   timedOut = 0;
-  rand:any;
+  rand!: number;
   record = Array();
   status = 0;
   allQuestions:any;
@@ -42,9 +42,9 @@ export class AppComponent implements OnInit {
   ngOnInit():void {
 
     //Fetch all the questions from the database  
-    this.req.getQuestions().subscribe(data=> {
-      this.allQuestions = data;
-
+    this.req.getQuestions().subscribe((data: any)=> {
+      // this.allQuestions = data; // if you're using fake server
+      this.allQuestions = data.questions; // if you're using github server
       //Once it has been fetched, within this function, initialize 
      //Generate a random number from the total number of questions (make sure its 1 less than the total number (array))
      this.rand = Math.round(Math.random() * this.allQuestions.length);
