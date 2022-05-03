@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+	margin: 0;
+	padding: 0;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	/* To make sure users don't copy text from the quiz */
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+html {
+	background-color: #e6e6e6;
+}

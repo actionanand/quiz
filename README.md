@@ -25,6 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Resources
 
 - [How to deploy a React, Angular and Vue project to Github pages](https://deepinder.me/how-to-deploy-a-react-angular-vue-project-to-github-pages)
+- [Typicode json-server : npm package](https://www.npmjs.com/package/json-server)
+- [Typicode json-server : GitHub](https://github.com/typicode/json-server)
 
 ## Further help
 
