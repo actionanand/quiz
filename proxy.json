@@ -1,0 +1,8 @@
+{
+  "/questions": {
+    "target": "https://3000-actionanand-quiz-v04ja8xzwqf.ws-us43.gitpod.io/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
