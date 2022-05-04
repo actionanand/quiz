@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { QuizData } from './model/quiz-data';
 import { QuestionsService } from './services/questions.service';
 
 
@@ -103,10 +105,8 @@ export class AppComponent implements OnInit {
 
   optionSelect(e: any ) {
     this.optionBg = true;
-    console.log(e);
     //set ans value based on the option selected ; it's PointerEvent
 	  this.ans = parseInt(e.target.id.replace("option",""),10); // say, #option2 will become #2
-    console.log(this.ans);
   }
 
   randomGenerator() {
@@ -196,7 +196,7 @@ export class AppComponent implements OnInit {
       this.secs--;
       if(this.secs < 0) {
         clearTimeout(this.countDown);
-        console.log("counddown" + this.countDown);
+        // console.log("counddown" + this.countDown);
         this.secs =  this.secsInput;
         this.nextQuestion();
         return;
