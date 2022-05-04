@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { QuestionsService } from './services/questions.service';
 
 
@@ -9,55 +9,58 @@ import { QuestionsService } from './services/questions.service';
 })
 export class AppComponent implements OnInit {
 
-  //1. Set and initialize properties 
-  nums = [1,2,3,4,5,6,7,8,9,10];
-  buttons = [1,2,3,4];
+  //1. Set and initialize properties
+  trackQnCount = [...Array(10)].map((e, i) => (i + 1)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  buttons = [...Array(4)].map((e, i) => (i + 1));
   questionCount = 0;
   score = 0;
-  ans:any;
+  ans!: number;
   timedOut = 0;
   rand!: number;
   record = Array();
   status = 0;
-  allQuestions:any;
-  options = ['Option1','Option2','Option3','Option4'];
-  question:any;
-  defaultColor = '#e6f3ff';
+  allQuestions: any;
+   // ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  options = [...Array(4)].map((e, i) => ('Option ' + (i + 1)));
+  question!: string;
+  defaultColor = '#e6f3ff'; // Alice Blue
   submit = 'Next Question';
   submitStyle = '';
-  optionBg = false; 
-  trackerColor = ['#8c8c8c','#8c8c8c','#8c8c8c','#8c8c8c','#8c8c8c','#8c8c8c','#8c8c8c','#8c8c8c','#8c8c8c','#8c8c8c'];
-  display = false; 
-  progress = "Question " + (this.questionCount+1) + " of 10";
+  optionBg = false;
+  trackerColor = [...Array(10)].map((e, i) => ('#8c8c8c')); // Suva Grey
+  isResultDisplay = false;
+  progress = "Question " + (this.questionCount + 1) + " of 10";
   result = '';
-  timerInit = false; 
+  timerInit = false;
 
-  countDown:any; 
+  countDown: any;
   timer = '00:00';
   secsInput = 30;
-  secs = this.secsInput; 
+  secs = this.secsInput;
 
-  constructor(private req: QuestionsService, private cdr: ChangeDetectorRef) {}
+  // constructor(private req: QuestionsService, private cdr: ChangeDetectorRef) {}
+
+  constructor(private qtnServ: QuestionsService) {}
 
   ngOnInit():void {
 
-    //Fetch all the questions from the database  
-    this.req.getQuestions().subscribe((data: any)=> {
+    //Fetch all the questions from the database
+    this.qtnServ.getQuestions().subscribe((data: any)=> {
       // this.allQuestions = data; // if you're using fake server
       this.allQuestions = data.questions; // if you're using github server
-      //Once it has been fetched, within this function, initialize 
+      //Once it has been fetched, within this function, initialize
      //Generate a random number from the total number of questions (make sure its 1 less than the total number (array))
      this.rand = Math.round(Math.random() * this.allQuestions.length);
-     
+
      while(this.rand == this.allQuestions.length) {
         this.rand = Math.round(Math.random() * this.allQuestions.length);
      }
       //Set the record array to keep track of the numbers used to retrieve questions
       this.record[0] = this.rand;
-      
+
       //Call the getQuestion method to access the question
       this.getQuestion(this.questionCount, this.rand);
-      this.timerInit = true; 
+      this.timerInit = true;
 
     });
   }
@@ -65,14 +68,14 @@ export class AppComponent implements OnInit {
   @ViewChild('timerEl') timerEl: any;
   ngAfterViewInit() {
     this.startTimer(this.timerEl.nativeElement);
-    this.cdr.detectChanges();
+    // this.cdr.detectChanges();
   }
 
   //2. Load the first question into the app - get from database
 
   setQuestion(qCount:any, rand:any) {
     var ques = this.allQuestions[rand];
-    this.question = (qCount+1) + ". " + ques.question;
+    this.question = (qCount + 1) + ". " + ques.question;
     this.options[0] = ques.option1;
     this.options[1] = ques.option2;
     this.options[2] = ques.option3;
@@ -85,23 +88,25 @@ export class AppComponent implements OnInit {
     }
     if(qCount == 9) { //last question
       this.submit = "Submit Test";
-      this.submitStyle = "#00b300";
+      this.submitStyle = "#00b300"; // Islamic Green
     }
 
     if(qCount > 9) {
       return;
     }
-    
-    this.trackerColor[this.questionCount] = '#cc7a00';
-    this.setQuestion(qCount,rand);
+
+    this.trackerColor[this.questionCount] = '#cc7a00'; // Dark Goldenrod
+    this.setQuestion(qCount, rand);
     this.defaultColor = '#e6f3ff'; //make sure the colors are back to normal for the options
   }
 
 
-  optionSelect(e:any) {
+  optionSelect(e: any ) {
     this.optionBg = true;
-    //set ans value based on the option selected 
-	  this.ans = parseInt(e.target.id.replace("option",""),10);
+    console.log(e);
+    //set ans value based on the option selected ; it's PointerEvent
+	  this.ans = parseInt(e.target.id.replace("option",""),10); // say, #option2 will become #2
+    console.log(this.ans);
   }
 
   randomGenerator() {
@@ -113,7 +118,7 @@ export class AppComponent implements OnInit {
           if(this.rand === this.record[j]) {
             break;
           }
-          
+
           else if(j == this.record.length - 1) {
             this.record[this.questionCount] = this.rand;
             this.status = 1;
@@ -122,17 +127,17 @@ export class AppComponent implements OnInit {
       }
     }
     this.status = 0;
-  
+
     return this.rand;
   }
 
   setCorrect() {
     this.score++;
-    this.trackerColor[this.questionCount] = "#009900";
+    this.trackerColor[this.questionCount] = "#009900"; // Islamic Green
   }
-  
+
   setWrong() {
-    this.trackerColor[this.questionCount] = "#cc0000";
+    this.trackerColor[this.questionCount] = "#cc0000"; // Free Speech Red
   }
 
   finalScore() {
@@ -145,7 +150,7 @@ export class AppComponent implements OnInit {
   }
 
   setResultPage() {
-    this.display = true; 
+    this.isResultDisplay = true;
     this.progress = 'Quiz Completed';
     this.finalScore();
     this.timer = '00:00'
@@ -159,7 +164,7 @@ export class AppComponent implements OnInit {
     this.secs = this.secsInput;
     this.timer = "00:" + this.secs;
     //last question
-    if(this.questionCount == 9) { 
+    if(this.questionCount == 9) {
 			if(this.ans == this.allQuestions[this.rand].answer) {
 				this.setCorrect();
 			}
@@ -169,7 +174,7 @@ export class AppComponent implements OnInit {
 			this.setResultPage();
 			return;
 		}
-		
+
 		if(this.ans == this.allQuestions[this.rand].answer) {
 			this.setCorrect();
 			this.getQuestion(++this.questionCount, this.randomGenerator());
@@ -189,18 +194,18 @@ export class AppComponent implements OnInit {
     this.countDown = setTimeout(() => {
       this.timer = "00:" + this.secs;
       this.secs--;
-      if(this.secs<0) {
+      if(this.secs < 0) {
         clearTimeout(this.countDown);
         console.log("counddown" + this.countDown);
-        this.secs =  this.secsInput; 
+        this.secs =  this.secsInput;
         this.nextQuestion();
         return;
       }
       this.startTimer(this.timerEl.nativeElement);
     },1000);
   }
-  
+
   //n == (questionCount + 1) ? '#cc7a00' : '#8c8c8c'
-  //Tracker color function 
+  //Tracker color function
   //[style.background-color]="n == questionCount ? trackerColor : '#8c8c8c'"
 }

@@ -1,28 +1,59 @@
-<div class="quiz" role="banner">
+<div class="quiz-wrap" role="banner">
   <header>
-    <h1 id="h1">HTML &amp; CSS Quiz</h1>
+    <h1>HTML &amp; CSS Quiz</h1>
   </header>
-    <div id="tracker">
-      <div *ngFor="let n of nums" class="nos" id="{{ 'nos' + n}}" [style.background-color]="this.trackerColor[n-1]">{{ n }}</div>
-    </div>
-    <hr style="margin-bottom: 20px;">
 
-  <div id="quizSet" [style.display] = "display ? 'none' : 'block'">
-    <p id="question">{{ question }}</p>
-    <div id="options" class="options">
-		<button [style.backgroundColor] = "optionBg && (i + 1) == ans ? '#1aff1a' : defaultColor" *ngFor="let o of options; index as i" id="{{ 'btn' + (i+1)}}" class="button"><span (click) = "optionSelect($event)" id="{{ 'option' + (i+1) }}">{{ o }}</span></button>
+  <div class="quiz-wrap-tracker">
+    <div *ngFor="let tQn of trackQnCount" class="quiz-wrap-tracker-nos" id="{{ 'nos' + tQn}}"
+    [style.background-color]="this.trackerColor[tQn-1]">
+      {{ tQn }}
     </div>
-    <button (click) = "nextQuestion()" id="submit">Next Question</button>
   </div>
-  <div id="resultBox" [style.display] = "!display ? 'none' : 'block'">
-    <p id="result">{{ result }} </p>
-    <button (click) = "retakeTest()" id="retake">Retake Test</button>
+
+  <hr style="margin-bottom: 20px;" class="quiz-hr">
+
+  <div class="quiz-wrap-quizSet" *ngIf="!isResultDisplay; else showResultDisp">
+    <p class="quiz-wrap-quizSet--question">{{ question }}</p>
+    <div class="quiz-wrap-quizSet--options">
+      <!-- #1aff1a - Free Speech Green -->
+      <button [style.backgroundColor] = "optionBg && (i + 1) == ans ? '#1aff1a' : defaultColor"
+      *ngFor="let option of options; index as i" id="{{ 'option' + (i + 1)}}" class="quiz-button"
+      (click) = "optionSelect($event)">
+        {{ option }}
+      </button>
+    </div>
+    <button (click) = "nextQuestion()" class="quiz-button-submit">Next Question</button>
   </div>
-  <hr style="margin-top: 30px;">
-  
+
+  <ng-template #showResultDisp>
+    <div class="quiz-wrap-result-wrap">
+      <p class="quiz-wrap-result-wrap--result">{{ result }} </p>
+      <button (click) = "retakeTest()" class="quiz-wrap-result-wrap--retake">Retake Test</button>
+    </div>
+  </ng-template>
+
+  <!-- <div class="quiz-wrap-quizSet" [style.display] = "isResultDisplay ? 'none' : 'block'">
+    <p class="quiz-wrap-quizSet--question">{{ question }}</p>
+    <div class="quiz-wrap-quizSet--options">
+		<button [style.backgroundColor] = "optionBg && (i + 1) == ans ? '#1aff1a' : defaultColor"
+    *ngFor="let option of options; index as i" id="{{ 'option' + (i + 1)}}" class="quiz-button"
+    (click) = "optionSelect($event)">
+      {{ option }}
+    </button>
+    </div>
+    <button (click) = "nextQuestion()" class="quiz-button-submit">Next Question</button>
+  </div> -->
+
+  <!-- <div class="quiz-wrap-result-wrap" [style.display] = "!isResultDisplay ? 'none' : 'block'">
+    <p class="quiz-wrap-result-wrap--result">{{ result }} </p>
+    <button (click) = "retakeTest()" class="quiz-wrap-result-wrap--retake">Retake Test</button>
+  </div> -->
+
+  <hr style="margin-top: 30px;" class="quiz-hr">
+
   <footer>
-    <p id="progress">{{ progress }}</p>
-    <div #timerEl id="timer">{{ timer }}</div>
+    <p class="quiz-progress">{{ progress }}</p>
+    <div #timerEl class="quiz-timer">{{ timer }}</div>
   </footer>
 </div>
 
