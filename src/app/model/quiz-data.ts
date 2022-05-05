@@ -1,4 +1,7 @@
 export interface QuizData {
+  'quiz-title': string,
+  options: number,
+  'questions-to-display': number,
   questions: [
     {
       id: number;

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { QuizData } from '../model/quiz-data';
 
 
 @Injectable({
@@ -13,6 +14,6 @@ export class QuestionsService {
     // const url = 'http://localhost:3000/questions'; // for fake server
     const url = 'https://raw.githubusercontent.com/actionanand/json-server/main/db/api/quiz/questions.json';
 
-    return this.http.get(url);
+    return this.http.get<QuizData>(url);
   }
 }
