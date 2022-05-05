@@ -1,5 +1,7 @@
+@import './shared-style/_style-variables';
+
 .quiz-wrap {
-	background-color: #001a33; // Black Pearl
+	background-color: $blackPearlColor;
 	position: relative;
 	height: auto;
 	width: 900px;
@@ -12,8 +14,8 @@
     position: relative;
     text-align: center;
     font-size: 60px;
-    background-color: #e6e6e6; // Whisper
-    color: #001a33;
+    background-color: $whisperColor;
+    color: $blackPearlColor;
     border-radius: 40px;
     margin: 30px 10px 30px 10px;
     padding: 2px 0px;
@@ -29,7 +31,7 @@
       display: inline-block;
       width: 50px;
       height: 50px;
-      background-color: #8c8c8c; // Suva Grey
+      background-color: $suvaGreyColor;
       border-radius: 50%;
       text-align: center;
       color: white;
@@ -95,7 +97,7 @@
       position: relative;
       display: block;
       margin: 10px auto 25px auto;
-      background-color: #595959; // Zambezi
+      background-color: $zambeziColor;
       color: white;
       width: 230px;
       padding: 7px;
@@ -109,7 +111,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: #808080; // Grey
+        background-color: $greyColor;
       }
 
       &:focus {
@@ -121,28 +123,28 @@
 }
 
 .quiz-hr {
-  border: 2px solid #8c8c8c;
+  border: 2px solid $suvaGreyColor;
   position: relative;
   clear: both;
 }
 
 .quiz-button {
 	position: relative;
-	background-color: #e6f3ff;  // Alice Blue
+	background-color: $aliceBlueColor;
 	width: 250px;
 	height: auto;
-	border: 1.5px solid #339cff;  // Dodger Blue
+	border: 1.5px solid $dodgerBlueColor;
 	border-radius: 75px;
 	margin: 10px;
   text-align: center;
   font-size: 20px;
   padding: 10px;
   font-weight: bold;
-  color: #001a33;
+  color: $blackPearlColor;
 
   // hover won't be executed, as bg is set from dom
   &:hover {
-    background-color: #99ceff; // Columbia Blue
+    background-color: $columbiaBlueColor;
 	  cursor: pointer;
   }
 
@@ -154,7 +156,7 @@
 .quiz-button-submit {
   position: relative;
 	float: right;
-	background-color: #595959;
+	background-color: $zambeziColor;
 	color: white;
 	width: 230px;
 	padding: 7px;
@@ -169,7 +171,7 @@
 
   &:hover {
     cursor: pointer;
-    background-color: #808080;
+    background-color: $greyColor;
   }
 
   &:focus {
