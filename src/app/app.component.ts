@@ -212,6 +212,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.getQuestion(++this.questionCount, this.randomGenerator());
     this.progress = "Question " + (this.questionCount+1) + " of 10";
+    this.ans = NaN;
   }
 
   retakeTest() {
@@ -239,6 +240,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.timer = '00:00';
     this.secsInput = 30;
     this.secs = this.secsInput;
+    this.ans = NaN;
     this.onGettingQtnz();
     this.startTimer(this.timerEl.nativeElement);
   }

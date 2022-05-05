@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import './app/shared-style/_style-variables';
+
 * {
 	margin: 0;
 	padding: 0;
@@ -14,5 +16,5 @@
 }
 
 html {
-	background-color: #e6e6e6;
+	background-color: $whisperColor;
 }
