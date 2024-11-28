@@ -3,7 +3,8 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
-  - init: npm install && npm run build
-    command: npm run start
-
+  - name: Angular 13
+    before: nvm install v18.20.2
+    init: npm install && npm run build
+    command: npm run develop
 
