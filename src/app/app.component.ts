@@ -78,6 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
   onGettingQtnz() {
     //Fetch all the questions from the database
     this.unSub = this.qtnServ.getQuestions().subscribe((data: QuizData)=> {
+      console.log(data.questions)
       // this.allQuestions = data; // if you're using fake server
       this.allQuestions = data.questions; // if you're using github server
       this.quizTitle = data['quiz-title'];
